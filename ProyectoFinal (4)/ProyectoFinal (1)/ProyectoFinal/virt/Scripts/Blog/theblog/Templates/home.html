@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+
+<h1>Post</h1>
+<ul>
+{% for post in object_list %}
+   <li>
+	   <h1><a href="{% url 'article-detail' post.pk %}"> {{ post.title}}</a> -</h1>
+	{% if post.header_image %}
+		<a href="{% url 'article-detail' post.pk %}"><img src="{{ post.header_image.url }}" width="250px" height="350px" style="object-fit: cover; object-position: center center;"></a>
+	{% endif %}
+	
+   	<a href="{% url 'category' post.category %}"> {{ post.category }}</a>
+   	- {{ post.author}}  
+   	- {{ post.post_date }} - 
+
+{% if user.is_authenticated %}
+   	<a href="{% url 'update_post' post.pk %}">(Editar)</a> 
+   	<a href="{% url 'delete_post' post.pk %}">(Eliminar)</a>
+   	{% endif %}
+   	<br/>
+   {{ post.body | slice:":100" }}...</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
+

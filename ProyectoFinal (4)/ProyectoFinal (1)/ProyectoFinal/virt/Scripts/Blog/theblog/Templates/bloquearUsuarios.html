@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+
+{% if user.is_authenticated %}
+<div class="form group">
+<form method="POST">
+	{% csrf_token %}
+    Para bloquear un usuario presione en "Users", luego elija el usuario que desea bloquear y dirijase en "Permisos", y deshabilite la parte de "activo"
+    <a href="{%url 'enviarAdmin'%}">Presione aquí</a>
+</div>
+{% else %}
+¡Debes registrarte o loguearte!
+{% endif %}
+{% endblock %}

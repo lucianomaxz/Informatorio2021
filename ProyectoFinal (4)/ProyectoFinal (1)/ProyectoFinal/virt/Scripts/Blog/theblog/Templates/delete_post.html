@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+
+{% if user.is_authenticated %}
+<h1>Eliminar Post</h1>
+<div class="form group">
+<form method="POST">
+	{% csrf_token %}
+    <strong> ¿Está seguro?</strong><br/>
+	 {{form.as_p}}
+	<button class="btn btn-primary">Eliminar</button>
+
+
+	<a href="{% url 'home' %}" class="btn btn-primary"> Atrás</a>  
+</div>
+{% else %}
+¡Debes registrarte o loguearte!
+{% endif %}
+
+{% endblock %}

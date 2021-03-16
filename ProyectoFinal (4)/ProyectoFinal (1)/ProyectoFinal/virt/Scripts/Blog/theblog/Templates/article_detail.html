@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h1>{{ post.title }}</h1>
+<small>Por: {{ post.author }} - {{ post.post_date }} </small>
+
+<hr>
+
+{% if post.header_image %}
+<img src="{{ post.header_image.url }}" width="50%">
+{% endif %}
+
+<br><br/>
+
+{{ post.body }}
+<hr>
+<h2>Comentarios:</h2>
+<br/>
+{% if not post.comments.all %}
+   No hay comentarios aún. ¡Sé el primero en comentar este post! <a href="{% url 'add_comment' post.pk %}"> Comentar </a> 
+
+{% else %}
+
+<a href="{% url 'add_comment' post.pk %}"> Comentar </a>
+<br><br/>
+
+     {% for comment in post.comments.all %}
+     <strong>{{ comment.name }} - 
+     {{ comment.date_added }}
+ </strong>
+ <br/>
+ {{ comment.body }}
+ <br><br/>
+ <hr>
+ {% endfor %}   
+{% endif %}   
+
+<br><br/>
+<a href="{% url 'home' %}" class="btn btn-primary"> Atrás</a>
+
+{% endblock %}
